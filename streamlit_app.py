@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, timedelta, timezone
 
 st.title("🎫 한화 직링 생성기")
-st.caption("※ 제발 티켓팅 좀 성공하자 by 1004")
+st.caption("※ 제발 티켓팅 좀 성공하자 by 1004\n⚠️ 주의: 예매 시작 시간인 11시 정각에 입장할 것!")
 
 # 고정된 팀 정보
 team_id = "63"         # 한화 이글스
