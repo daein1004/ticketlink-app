@@ -18,14 +18,15 @@ def get_ticketlink_server_time_with_ms():
     except Exception as e:
         return f"❌ 오류: {e}"
 
-st.title("🎫 한화 직링 생성기")
+st.title("잔디석 가고 만다")
 st.image(
     "https://mblogthumb-phinf.pstatic.net/20141010_274/doubledune__1412906537536CPFBI_PNG/%B4%D9%C5%A5%B8%E0%C5%CD%B8%AE_3%C0%CF.E366.140914.9%C8%B8_%B8%BB_%C5%F5%BE%C6%BF%F4_-_%C7%D1%C8%AD_%C0%CC%B1%DB%BD%BA_72%BD%C3%B0%A3.HDTV.H264.720p-WITH_0001407129ms.png?type=w420",
     use_container_width=True
 )
 st.markdown("""
-> 🙏 꿈돌이 김대인의 한화 티켓팅.  
+> 🙏 꿈돌이 김*인의 한화 티켓팅 도전기.   
 > ⚠️ 예매 시작 시간 전에 입장 시 막힐 수 있음.  
+> 📝 직링 복사하고 주소창 붙여 넣기 후, 11시 땡하면 엔터.  
 > 👉 티켓팅 망해도 내 탓 아님.
 """)
 
