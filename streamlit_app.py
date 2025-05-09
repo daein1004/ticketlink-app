@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, timedelta, timezone
 
 st.title("🎫 티켓링크 직링 생성기")
-st.caption("※ 한화 이글스 기준, 날짜 선택 시 직링 및 경기 정보를 자동 추출합니다.")
+st.caption("※ 한화 이글스 제발 티켓팅 좀 성공하자 by 김대인")
 
 # 고정된 팀 정보
 team_id = "63"         # 한화 이글스
