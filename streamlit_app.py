@@ -12,11 +12,34 @@ st.markdown("""
 team_id = "63"         # 한화 이글스
 category_id = "137"    # 야구
 
+# ✅ 이번 달 경기 리스트 불러오기
+today = datetime.now()
+start_of_month = today.replace(day=1).strftime("%Y%m%d")
+end_of_month = (today.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
+end_of_month_str = end_of_month.strftime("%Y%m%d")
+
+schedule_url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId={category_id}&teamId={team_id}&startDate={start_of_month}&endDate={end_of_month_str}"
+
+try:
+    res = requests.get(schedule_url)
+    schedules = res.json()['data']['schedules']
+    if schedules:
+        st.subheader("📅 이번 달 예정된 경기")
+        for s in schedules:
+            match_time = datetime.fromtimestamp(s['scheduleDate'] / 1000, tz=timezone(timedelta(hours=9)))
+            date_str = match_time.strftime("%m월 %d일 (%a) %H:%M")
+            st.write(f"- {date_str}: {s['homeTeam']['teamName']} vs {s['awayTeam']['teamName']} ({s['matchTitle']})")
+    else:
+        st.write("이번 달에는 예정된 경기가 없습니다.")
+except Exception as e:
+    st.error(f"⚠️ 경기 정보를 불러오는 데 실패했습니다: {e}")
+
 # 날짜 선택
-selected_date = st.date_input("📅 경기 날짜 선택")
+selected_date = st.date_input("📅 예매 링크를 만들 날짜 선택")
 start_date = selected_date.strftime("%Y%m%d")
 end_date = (selected_date + timedelta(days=1)).strftime("%Y%m%d")
 
+# 링크 생성
 if st.button("직링 생성"):
     url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId={category_id}&teamId={team_id}&startDate={start_date}&endDate={end_date}"
     
@@ -35,14 +58,11 @@ if st.button("직링 생성"):
             away_team = schedule['awayTeam']['teamName']
             match_title = schedule['matchTitle']
 
-            # ✅ 한국 시간으로 변환
             KST = timezone(timedelta(hours=9))
             match_time = datetime.fromtimestamp(schedule['scheduleDate'] / 1000, tz=KST).strftime("%Y년 %m월 %d일 %H:%M")
 
-            # 직링 (요구한 형식으로)
             link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
 
-            # 출력
             st.success(f"🔗 직링: {link}")
             st.info(f"""
 - 🏟️ 경기: {home_team} vs {away_team}  
