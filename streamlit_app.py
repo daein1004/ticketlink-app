@@ -67,9 +67,11 @@ schedule_url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId=
 try:
     res = requests.get(schedule_url)
     schedules = res.json()['data']['schedules']
-    if schedules:
-        st.subheader("📌 이번 달 예정된 경기")
-        for s in schedules:
+    filtered = [s for s in schedules if s['homeTeam']['teamName'] == "한화이글스"]
+
+    if filtered:
+        st.subheader("📌 이번 달 한화 홈경기 일정")
+        for s in filtered:
             match_time = datetime.fromtimestamp(s['scheduleDate'] / 1000, tz=timezone(timedelta(hours=9)))
             date_str = match_time.strftime("%m월 %d일 (%a) %H:%M")
             home = s['homeTeam']['teamName']
@@ -82,6 +84,6 @@ try:
 &nbsp;&nbsp;&nbsp;🎯 구간: {section}
 """)
     else:
-        st.write("이번 달에는 예정된 경기가 없습니다.")
+        st.info("이번 달 한화 홈경기는 없습니다.")
 except Exception as e:
     st.error(f"⚠️ 경기 정보를 불러오는 데 실패했습니다: {e}")
