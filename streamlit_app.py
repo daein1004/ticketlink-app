@@ -4,8 +4,9 @@ from datetime import datetime, timedelta, timezone
 
 st.title("🎫 한화 직링 생성기")
 st.markdown("""
-> 🙏 제발 티켓팅 좀 성공하자 **by 1004**  
-> ⚠️ **주의:** 예매 시작 시간인 **11시 정각**에 입장할 것!
+> 🙏 꿈돌이 김대인의 한화 티켓팅 **by 1004**  
+> ⚠️ **주의:** 예매 시작 시간인 **11시 정각**에 입장
+> 👉 막혀도 내 탓 아님.
 """)
 
 # 고정된 팀 정보
@@ -13,7 +14,7 @@ team_id = "63"         # 한화 이글스
 category_id = "137"    # 야구
 
 # ✅ 날짜 선택
-selected_date = st.date_input("📅 예매 링크를 만들 날짜 선택")
+selected_date = st.date_input("📅 경기 날짜 선택")
 start_date = selected_date.strftime("%Y%m%d")
 end_date = (selected_date + timedelta(days=1)).strftime("%Y%m%d")
 
