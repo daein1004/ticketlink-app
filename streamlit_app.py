@@ -13,7 +13,6 @@ st.markdown("""
 > 👉 막혀도 내 탓 아님.
 """)
 
-
 # 고정된 팀 정보
 team_id = "63"         # 한화 이글스
 category_id = "137"    # 야구
@@ -73,7 +72,15 @@ try:
         for s in schedules:
             match_time = datetime.fromtimestamp(s['scheduleDate'] / 1000, tz=timezone(timedelta(hours=9)))
             date_str = match_time.strftime("%m월 %d일 (%a) %H:%M")
-            st.write(f"- {date_str}: {s['homeTeam']['teamName']} vs {s['awayTeam']['teamName']} ({s['matchTitle']})")
+            home = s['homeTeam']['teamName']
+            away = s['awayTeam']['teamName']
+            section = s['matchTitle']
+
+            st.markdown(f"""
+**• {date_str}**  
+&nbsp;&nbsp;&nbsp;🏟️ {home} vs {away}  
+&nbsp;&nbsp;&nbsp;🎯 구간: {section}
+""")
     else:
         st.write("이번 달에는 예정된 경기가 없습니다.")
 except Exception as e:
