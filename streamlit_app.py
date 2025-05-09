@@ -1,8 +1,6 @@
 import streamlit as st
 import requests
 from datetime import datetime, timedelta, timezone
-import calendar
-import pandas as pd
 
 st.title("🎫 한화 직링 생성기")
 st.markdown("""
@@ -10,47 +8,66 @@ st.markdown("""
 > ⚠️ **주의:** 예매 시작 시간인 **11시 정각**에 입장할 것!
 """)
 
-# 고정값
-team_id = "63"
-category_id = "137"
-KST = timezone(timedelta(hours=9))
+# 고정된 팀 정보
+team_id = "63"         # 한화 이글스
+category_id = "137"    # 야구
 
-# 오늘 기준 이번달 계산
-today = datetime.now(KST)
-year, month = today.year, today.month
-start_date = f"{year}{month:02d}01"
-last_day = calendar.monthrange(year, month)[1]
-end_date = f"{year}{month:02d}{last_day:02d}"
+# ✅ 이번 달 경기 리스트 불러오기
+today = datetime.now()
+start_of_month = today.replace(day=1).strftime("%Y%m%d")
+end_of_month = (today.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
+end_of_month_str = end_of_month.strftime("%Y%m%d")
 
-# 경기 정보 불러오기
-url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId={category_id}&teamId={team_id}&startDate={start_date}&endDate={end_date}"
-res = requests.get(url)
-data = res.json().get("data", {}).get("schedules", [])
+schedule_url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId={category_id}&teamId={team_id}&startDate={start_of_month}&endDate={end_of_month_str}"
 
-# 날짜별 경기 정보 매핑
-match_map = {}
-for match in data:
-    date = datetime.fromtimestamp(match["scheduleDate"] / 1000, tz=KST).date()
-    opponent = match["awayTeam"]["teamName"]
-    match_map[date.day] = f"vs {opponent}"
+try:
+    res = requests.get(schedule_url)
+    schedules = res.json()['data']['schedules']
+    if schedules:
+        st.subheader("📅 이번 달 예정된 경기")
+        for s in schedules:
+            match_time = datetime.fromtimestamp(s['scheduleDate'] / 1000, tz=timezone(timedelta(hours=9)))
+            date_str = match_time.strftime("%m월 %d일 (%a) %H:%M")
+            st.write(f"- {date_str}: {s['homeTeam']['teamName']} vs {s['awayTeam']['teamName']} ({s['matchTitle']})")
+    else:
+        st.write("이번 달에는 예정된 경기가 없습니다.")
+except Exception as e:
+    st.error(f"⚠️ 경기 정보를 불러오는 데 실패했습니다: {e}")
 
-# 달력 표 생성
-cal = calendar.Calendar()
-month_days = cal.monthdayscalendar(year, month)  # [[0, 0, 0, 1, 2, 3, 4], ...]
+# 날짜 선택
+selected_date = st.date_input("📅 예매 링크를 만들 날짜 선택")
+start_date = selected_date.strftime("%Y%m%d")
+end_date = (selected_date + timedelta(days=1)).strftime("%Y%m%d")
 
-cal_display = []
-for week in month_days:
-    row = []
-    for day in week:
-        if day == 0:
-            row.append("")  # 공란
-        elif day in match_map:
-            row.append(f"{day}\n{match_map[day]}")
+# 링크 생성
+if st.button("직링 생성"):
+    url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId={category_id}&teamId={team_id}&startDate={start_date}&endDate={end_date}"
+    
+    try:
+        res = requests.get(url)
+        data = res.json()
+        schedules = data['data']['schedules']
+
+        if not schedules:
+            st.warning("⚠️ 해당 날짜에 경기 정보가 없습니다.")
         else:
-            row.append(f"{day}")
-    cal_display.append(row)
+            schedule = schedules[0]
+            schedule_id = schedule['scheduleId']
+            product_id = schedule['productId']
+            home_team = schedule['homeTeam']['teamName']
+            away_team = schedule['awayTeam']['teamName']
+            match_title = schedule['matchTitle']
 
-# 달력 표시
-df = pd.DataFrame(cal_display, columns=["월", "화", "수", "목", "금", "토", "일"])
-st.subheader(f"📅 {month}월 경기 일정")
-st.dataframe(df, height=300)
+            KST = timezone(timedelta(hours=9))
+            match_time = datetime.fromtimestamp(schedule['scheduleDate'] / 1000, tz=KST).strftime("%Y년 %m월 %d일 %H:%M")
+
+            link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
+
+            st.success(f"🔗 직링: {link}")
+            st.info(f"""
+- 🏟️ 경기: {home_team} vs {away_team}  
+- 🎯 구간: {match_title}  
+- 🕒 시작 시간: {match_time}
+            """)
+    except Exception as e:
+        st.error(f"❌ 오류 발생: {e}")
