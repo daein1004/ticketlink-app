@@ -1,8 +1,24 @@
 import streamlit as st
 import requests
 from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+import time
 
-st.title("한화 직링 생성기")
+# ✅ 티켓링크 서버 시간 불러오기 함수 (밀리초 포함)
+def get_ticketlink_server_time_with_ms():
+    try:
+        t_start = time.time()
+        res = requests.get("https://www.ticketlink.co.kr")
+        t_end = time.time()
+        server_dt = parsedate_to_datetime(res.headers["Date"])
+        round_trip = (t_end - t_start) / 2
+        server_dt_local = server_dt + timedelta(hours=9, seconds=round_trip)
+        ms = int((server_dt_local.microsecond) / 1000)
+        return server_dt_local.strftime(f"%Y년 %m월 %d일 %H:%M:%S.{ms:03d}")
+    except Exception as e:
+        return f"❌ 오류: {e}"
+
+st.title("🎫 한화 직링 생성기")
 st.image(
     "https://mblogthumb-phinf.pstatic.net/20141010_274/doubledune__1412906537536CPFBI_PNG/%B4%D9%C5%A5%B8%E0%C5%CD%B8%AE_3%C0%CF.E366.140914.9%C8%B8_%B8%BB_%C5%F5%BE%C6%BF%F4_-_%C7%D1%C8%AD_%C0%CC%B1%DB%BD%BA_72%BD%C3%B0%A3.HDTV.H264.720p-WITH_0001407129ms.png?type=w420",
     use_container_width=True
@@ -12,6 +28,10 @@ st.markdown("""
 > ⚠️ 예매 시작 시간 전에 입장 시 막힐 수 있음.  
 > 👉 티켓팅 망해도 내 탓 아님.
 """)
+
+# ✅ 티켓링크 서버 시간 표시
+st.subheader("🕒 현재 티켓링크 서버 시간 (KST, 밀리초 포함)")
+st.code(get_ticketlink_server_time_with_ms())
 
 # 고정된 팀 정보
 team_id = "63"         # 한화 이글스
@@ -56,7 +76,7 @@ if st.button("직링 생성"):
     except Exception as e:
         st.error(f"❌ 오류 발생: {e}")
 
-# ✅ 이번 달 경기 리스트는 아래에 표시
+# ✅ 이번 달 경기 리스트 (홈경기만)
 today = datetime.now()
 start_of_month = today.replace(day=1).strftime("%Y%m%d")
 end_of_month = (today.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
