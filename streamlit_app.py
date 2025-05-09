@@ -2,7 +2,10 @@ import streamlit as st
 import requests
 from datetime import datetime, timedelta, timezone
 
-st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkiysVfhune8FJdE0QiuMLJAx-9auObUpDFA&s", use_column_width=True)
+st.image(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkiysVfhune8FJdE0QiuMLJAx-9auObUpDFA&s",
+    use_container_width=True
+)
 
 st.title("🎫 한화 직링 생성기")
 st.markdown("""
