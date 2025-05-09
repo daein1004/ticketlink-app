@@ -72,7 +72,8 @@ if st.button("직링 생성"):
     except Exception as e:
         st.error(f"❌ 오류 발생: {e}")
 
-# ✅ 향후 5주간 경기 리스트 (홈경기만)
+# ✅ 오늘 ~ 5주 후까지의 경기 리스트 (홈경기만)
+today = datetime.now()  # ← 이 줄이 꼭 있어야 함
 start_date_range = today.strftime("%Y%m%d")
 end_date_range = (today + timedelta(weeks=5)).strftime("%Y%m%d")
 
