@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 st.title("🎫 티켓링크 직링 생성기")
 st.caption("※ 한화 이글스 기준, 날짜 선택 시 직링 및 경기 정보를 자동 추출합니다.")
@@ -30,7 +30,10 @@ if st.button("직링 생성"):
             home_team = schedule['homeTeam']['teamName']
             away_team = schedule['awayTeam']['teamName']
             match_title = schedule['matchTitle']
-            match_time = datetime.fromtimestamp(schedule['scheduleDate'] / 1000).strftime("%Y년 %m월 %d일 %H:%M")
+
+            # ✅ 한국 시간 (KST)으로 변환
+            KST = timezone(timedelta(hours=9))
+            match_time = datetime.fromtimestamp(schedule['scheduleDate'] / 1000, tz=KST).strftime("%Y년 %m월 %d일 %H:%M")
 
             # 직링
             link = f"https://www.ticketlink.co.kr/reserve/plan/schedule/{schedule_id}?menuIndex=reserve"
