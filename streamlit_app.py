@@ -2,12 +2,15 @@ import streamlit as st
 import requests
 from datetime import datetime, timedelta, timezone
 
+st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkiysVfhune8FJdE0QiuMLJAx-9auObUpDFA&s", use_column_width=True)
+
 st.title("🎫 한화 직링 생성기")
 st.markdown("""
 > 🙏 꿈돌이 김대인의 한화 티켓팅 **by 1004**  
-> ⚠️ **주의:** 예매 시작 시간인 **11시 정각**에 입장
+> ⚠️ **주의:** 예매 시작 시간인 **11시 정각**에 입장  
 > 👉 막혀도 내 탓 아님.
 """)
+
 
 # 고정된 팀 정보
 team_id = "63"         # 한화 이글스
