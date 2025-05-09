@@ -18,7 +18,7 @@ def get_ticketlink_server_time_with_ms():
     except Exception as e:
         return f"❌ 오류: {e}"
 
-st.title("잔디석 가고 만다")
+st.title("🍀 모두 티켓팅 성공하길 🍀")
 st.image(
     "https://mblogthumb-phinf.pstatic.net/20141010_274/doubledune__1412906537536CPFBI_PNG/%B4%D9%C5%A5%B8%E0%C5%CD%B8%AE_3%C0%CF.E366.140914.9%C8%B8_%B8%BB_%C5%F5%BE%C6%BF%F4_-_%C7%D1%C8%AD_%C0%CC%B1%DB%BD%BA_72%BD%C3%B0%A3.HDTV.H264.720p-WITH_0001407129ms.png?type=w420",
     use_container_width=True
@@ -65,11 +65,13 @@ if st.button("직링 생성"):
             link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
 
             st.success(f"🔗 직링: {link}")
-            st.info(f"""
+st.text_input("📋 링크 복사 (Ctrl+C)", value=link)
+st.info(f"""
 - 🏟️ 경기: {home_team} vs {away_team}  
 - 🎯 구간: {match_title}  
 - 🕒 시작 시간: {match_time}
-            """)
+""")
+
     except Exception as e:
         st.error(f"❌ 오류 발생: {e}")
 
