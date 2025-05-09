@@ -65,13 +65,11 @@ if st.button("직링 생성"):
             link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
 
             st.success(f"🔗 직링: {link}")
-st.text_input("📋 링크 복사 (Ctrl+C)", value=link)
-st.info(f"""
+            st.info(f"""
 - 🏟️ 경기: {home_team} vs {away_team}  
 - 🎯 구간: {match_title}  
 - 🕒 시작 시간: {match_time}
-""")
-
+            """)
     except Exception as e:
         st.error(f"❌ 오류 발생: {e}")
 
@@ -105,4 +103,3 @@ try:
         st.info("향후 5주간 예정된 한화 홈경기가 없습니다.")
 except Exception as e:
     st.error(f"⚠️ 경기 정보를 불러오는 데 실패했습니다: {e}")
-
