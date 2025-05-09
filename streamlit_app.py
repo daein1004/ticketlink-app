@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 st.title("🎫 한화 직링 생성기")
 st.image(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkiysVfhune8FJdE0QiuMLJAx-9auObUpDFA&s",
+    "https://pbs.twimg.com/media/C-_kfhjV0AAioQd.jpg:large",
     use_container_width=True
 )
 st.markdown("""
