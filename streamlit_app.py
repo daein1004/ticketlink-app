@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 st.title("🎫 한화 직링 생성기")
 st.image(
-    "https://pbs.twimg.com/media/C-_kfhjV0AAioQd.jpg:large",
+    "https://mblogthumb-phinf.pstatic.net/20141010_274/doubledune__1412906537536CPFBI_PNG/%B4%D9%C5%A5%B8%E0%C5%CD%B8%AE_3%C0%CF.E366.140914.9%C8%B8_%B8%BB_%C5%F5%BE%C6%BF%F4_-_%C7%D1%C8%AD_%C0%CC%B1%DB%BD%BA_72%BD%C3%B0%A3.HDTV.H264.720p-WITH_0001407129ms.png?type=w420",
     use_container_width=True
 )
 st.markdown("""
