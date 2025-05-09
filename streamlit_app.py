@@ -27,16 +27,17 @@ if st.button("직링 생성"):
         else:
             schedule = schedules[0]
             schedule_id = schedule['scheduleId']
+            product_id = schedule['productId']
             home_team = schedule['homeTeam']['teamName']
             away_team = schedule['awayTeam']['teamName']
             match_title = schedule['matchTitle']
 
-            # ✅ 한국 시간 (KST)으로 변환
+            # ✅ 한국 시간으로 변환
             KST = timezone(timedelta(hours=9))
             match_time = datetime.fromtimestamp(schedule['scheduleDate'] / 1000, tz=KST).strftime("%Y년 %m월 %d일 %H:%M")
 
-            # 직링
-            link = f"https://www.ticketlink.co.kr/reserve/plan/schedule/{schedule_id}?menuIndex=reserve"
+            # 직링 (요구한 형식으로)
+            link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
 
             # 출력
             st.success(f"🔗 직링: {link}")
