@@ -7,10 +7,8 @@ import time
 
 # ✅ 앱 시작
 st.title("🍀 모두 티켓팅 성공하길 🍀")
-st.image(
-    "https://m1.daumcdn.net/cfile271/image/235D7B4A596EE7CE1578D1",
-    use_container_width=True
-)
+st.image("https://m1.daumcdn.net/cfile271/image/235D7B4A596EE7CE1578D1")
+
 st.markdown("""
 > 🙏 꿈돌이 김*인의 한화 티켓팅 도전기.   
 > ⚠️ 예매 시작 시간 전에 입장 시 막힐 수 있음.  
