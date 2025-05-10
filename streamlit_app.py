@@ -8,7 +8,7 @@ import time
 # ✅ 앱 시작
 st.title("🍀 모두 티켓팅 성공하길 🍀")
 st.image(
-    "https://mblogvideo-phinf.pstatic.net/MjAxNzA3MzBfOTIg/MDAxNTAxNDE0MTA3MTY3.pZ3H9KWw_bodiN14cc-9CEi7IUHpv7KP_d8kuQKM1Dog.q-2LEmBLuwCrAB6VXpcFcEmvNWKy0fnvxjCFGoc2-TIg.GIF.jjny919/IMG_4612.GIF?type=mp4w800",
+    "https://m1.daumcdn.net/cfile271/image/235D7B4A596EE7CE1578D1",
     use_container_width=True
 )
 st.markdown("""
