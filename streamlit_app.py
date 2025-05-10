@@ -18,6 +18,7 @@ def get_ticketlink_server_time_with_ms():
     except Exception as e:
         return f"❌ 오류: {e}"
 
+# ✅ 앱 시작
 st.title("🍀 모두 티켓팅 성공하길 🍀")
 st.image(
     "https://mblogthumb-phinf.pstatic.net/20141010_274/doubledune__1412906537536CPFBI_PNG/%B4%D9%C5%A5%B8%E0%C5%CD%B8%AE_3%C0%CF.E366.140914.9%C8%B8_%B8%BB_%C5%F5%BE%C6%BF%F4_-_%C7%D1%C8%AD_%C0%CC%B1%DB%BD%BA_72%BD%C3%B0%A3.HDTV.H264.720p-WITH_0001407129ms.png?type=w420",
@@ -30,7 +31,15 @@ st.markdown("""
 > 👉 티켓팅 망해도 내 탓 아님.
 """)
 
-# 고정된 팀 정보
+# 🔐 퀴즈 인증
+st.subheader("퀴즈")
+answer = st.text_input("꿈돌이 김*인의 생일은? (YYYYMMDD 형식으로 입력)")
+
+if answer.strip() != "200001004":
+    st.warning("❌ 정답을 맞춰야 이용할 수 있습니다.")
+    st.stop()
+
+# ✅ 고정된 팀 정보
 team_id = "63"         # 한화 이글스
 category_id = "137"    # 야구
 
@@ -42,7 +51,6 @@ end_date = (selected_date + timedelta(days=1)).strftime("%Y%m%d")
 # ✅ 링크 생성
 if st.button("직링 생성"):
     url = f"https://mapi.ticketlink.co.kr/mapi/sports/schedules?categoryId={category_id}&teamId={team_id}&startDate={start_date}&endDate={end_date}"
-    
     try:
         res = requests.get(url)
         data = res.json()
@@ -65,6 +73,7 @@ if st.button("직링 생성"):
             link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
 
             st.success(f"🔗 직링: {link}")
+            st.text_input("📋 복사할 링크", value=link)
             st.info(f"""
 - 🏟️ 경기: {home_team} vs {away_team}  
 - 🎯 구간: {match_title}  
@@ -73,8 +82,8 @@ if st.button("직링 생성"):
     except Exception as e:
         st.error(f"❌ 오류 발생: {e}")
 
-# ✅ 오늘 ~ 5주 후까지의 경기 리스트 (홈경기만)
-today = datetime.now()  # ← 이 줄이 꼭 있어야 함
+# ✅ 향후 5주간 한화 홈경기 일정 표시
+today = datetime.now()
 start_date_range = today.strftime("%Y%m%d")
 end_date_range = (today + timedelta(weeks=5)).strftime("%Y%m%d")
 
