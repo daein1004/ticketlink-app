@@ -23,7 +23,7 @@ st.subheader("퀴즈")
 answer = st.text_input("꿈돌이 김*인의 생일은? (YYYYMMDD 형식으로 입력)")
 
 if answer.strip() != "20001004":
-    st.warning("❌ 정답을 모르는 당신 직링을 이용할 자격이 없다 ❌")
+    st.warning("❌ 정답을 모르는 당신, 이용할 자격이 없다 ❌")
     st.stop()
 
 # ✅ 고정된 팀 정보
