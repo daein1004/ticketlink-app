@@ -22,8 +22,8 @@ st.markdown("""
 st.subheader("퀴즈")
 answer = st.text_input("꿈돌이 김*인의 생일은? (YYYYMMDD 형식으로 입력)")
 
-if answer.strip() != "200001004":
-    st.warning("❌ 정답을 맞춰야 이용할 수 있습니다.")
+if answer.strip() != "20001004":
+    st.warning("❌ 정답을 모르는 당신 직링을 이용할 자격이 없다 ❌")
     st.stop()
 
 # ✅ 고정된 팀 정보
@@ -59,8 +59,8 @@ if st.button("직링 생성"):
 
             link = f"https://www.ticketlink.co.kr/reserve/product/{product_id}?scheduleId={schedule_id}"
 
-            st.success(f"🔗 직링: {link}")
-            st.text_input("📋 복사할 링크", value=link)
+            st.success(f"🔗 직링 바로가기: {link}")
+            st.text_input("📋 직링 복사하기", value=link)
             st.info(f"""
 - 🏟️ 경기: {home_team} vs {away_team}  
 - 🎯 구간: {match_title}  
