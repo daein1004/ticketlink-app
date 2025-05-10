@@ -4,19 +4,6 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 import time
 
-# ✅ 티켓링크 서버 시간 불러오기 함수 (밀리초 포함)
-def get_ticketlink_server_time_with_ms():
-    try:
-        t_start = time.time()
-        res = requests.get("https://www.ticketlink.co.kr")
-        t_end = time.time()
-        server_dt = parsedate_to_datetime(res.headers["Date"])
-        round_trip = (t_end - t_start) / 2
-        server_dt_local = server_dt + timedelta(hours=9, seconds=round_trip)
-        ms = int((server_dt_local.microsecond) / 1000)
-        return server_dt_local.strftime(f"%Y년 %m월 %d일 %H:%M:%S.{ms:03d}")
-    except Exception as e:
-        return f"❌ 오류: {e}"
 
 # ✅ 앱 시작
 st.title("🍀 모두 티켓팅 성공하길 🍀")
