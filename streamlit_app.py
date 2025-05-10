@@ -8,7 +8,7 @@ import time
 # ✅ 앱 시작
 st.title("🍀 모두 티켓팅 성공하길 🍀")
 st.image(
-    "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/496338540_18304854853243147_1829953540532404049_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjEzNTB4MTY4OC5zZHIuZjc1NzYxLmRlZmF1bHRfaW1hZ2UifQ&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QG4Tev0gB8OlrrUmamaxKDNf6Obpka5PQ-SfoRQbqygW8m_qcJ0idBUwwx_G0w06Hc&_nc_ohc=JXwcIyyuFjkQ7kNvwEn1Vp6&_nc_gid=RFC46UY2LGxA3olvBwGN5g&edm=AP4sbd4BAAAA&ccb=7-5&ig_cache_key=MzYyODczMTY5NDQ0ODM4MTE2NQ%3D%3D.3-ccb7-5&oh=00_AfLDdI9YL2shXtrr_wTBZgVGBkPkF9DkbtgdxRlTh6nONw&oe=682557F8&_nc_sid=7a9f4b",
+    "https://mblogvideo-phinf.pstatic.net/MjAxNzA3MzBfOTIg/MDAxNTAxNDE0MTA3MTY3.pZ3H9KWw_bodiN14cc-9CEi7IUHpv7KP_d8kuQKM1Dog.q-2LEmBLuwCrAB6VXpcFcEmvNWKy0fnvxjCFGoc2-TIg.GIF.jjny919/IMG_4612.GIF?type=mp4w800",
     use_container_width=True
 )
 st.markdown("""
