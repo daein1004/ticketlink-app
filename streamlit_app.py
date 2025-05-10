@@ -8,7 +8,7 @@ import time
 # ✅ 앱 시작
 st.title("🍀 모두 티켓팅 성공하길 🍀")
 st.image(
-    "https://mblogthumb-phinf.pstatic.net/20141010_274/doubledune__1412906537536CPFBI_PNG/%B4%D9%C5%A5%B8%E0%C5%CD%B8%AE_3%C0%CF.E366.140914.9%C8%B8_%B8%BB_%C5%F5%BE%C6%BF%F4_-_%C7%D1%C8%AD_%C0%CC%B1%DB%BD%BA_72%BD%C3%B0%A3.HDTV.H264.720p-WITH_0001407129ms.png?type=w420",
+    "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/496338540_18304854853243147_1829953540532404049_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjEzNTB4MTY4OC5zZHIuZjc1NzYxLmRlZmF1bHRfaW1hZ2UifQ&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QG4Tev0gB8OlrrUmamaxKDNf6Obpka5PQ-SfoRQbqygW8m_qcJ0idBUwwx_G0w06Hc&_nc_ohc=JXwcIyyuFjkQ7kNvwEn1Vp6&_nc_gid=RFC46UY2LGxA3olvBwGN5g&edm=AP4sbd4BAAAA&ccb=7-5&ig_cache_key=MzYyODczMTY5NDQ0ODM4MTE2NQ%3D%3D.3-ccb7-5&oh=00_AfLDdI9YL2shXtrr_wTBZgVGBkPkF9DkbtgdxRlTh6nONw&oe=682557F8&_nc_sid=7a9f4b",
     use_container_width=True
 )
 st.markdown("""
